@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import defaultdict
 class Solution(object):
     def topKFrequent(self, nums, k):
         """
@@ -6,11 +6,11 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        result = []
-        count = Counter(nums)
-        frequent = count.most_common(k)
-
-        for i in frequent:
-            result.append(i[0])
-
-        return result
+        count = defaultdict(int)
+        
+        for i in nums:
+            count[i] += 1
+        
+        return sorted(count, key=count.get, reverse=True)[:k]
+    
+        
