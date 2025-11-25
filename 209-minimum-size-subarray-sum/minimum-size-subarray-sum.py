@@ -5,20 +5,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        start = 0
-        summ = 0
-        min_leng = float('inf')
+
+        total =0
+        start =0
+        min_len = float('inf')
 
         for end in range(len(nums)):
-            summ += nums[end]
+            total += nums[end]
 
-            while summ >= target:
-                min_leng = min(min_leng, end-start+1)
-                summ -= nums[start]
-                start+=1
+            while total >= target:
+                min_len = min(min_len, end-start +1)
+                total -= nums[start]
+                start +=1
         
-        if min_leng == float('inf'):
+        if min_len == float('inf'):
             return 0
         else:
-            return min_leng 
-       
+            return min_len
+            
+        
