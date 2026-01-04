@@ -11,11 +11,10 @@ class Solution(object):
             for i in range(1, int(num ** 0.5)+1):
                 if num % i == 0:
                     sets.add(i)
-                    sets.add(num // i)
+                    sets.add(num / i)
             
             if len(sets) == 4:
                 return sets
-                
             else:
                 return None
         
