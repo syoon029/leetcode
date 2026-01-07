@@ -1,5 +1,4 @@
 from collections import deque
-from collections import defaultdict
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -12,43 +11,32 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: int
         """
-        #BFS
-        # queue = deque([root])
-        # max_sum = float('-inf')
-        # max_lev = 1
-        # cur_lev = 1
+        cur_level = 1
+        max_level = 1
+        max_sum = float('-inf')
 
-        # while queue:
-        #     cur_nodes = len(queue)
-        #     cur_sum = 0
+        queue = deque([root])
 
-        #     for i in range(cur_nodes):
-        #         nod = queue.popleft()
-        #         cur_sum += nod.val
+        while queue:
+            cur_sum = 0
+            cur_nods = len(queue)
 
-        #         if nod.left:
-        #             queue.append(nod.left)
-        #         if nod.right:
-        #             queue.append(nod.right)
+            for _ in range(cur_nods):
+                node = queue.popleft()
+
+                if node:
+                    cur_sum += node.val
+                if node.right:
+                    queue.append(node.right)
+                if node.left:
+                    queue.append(node.left)
+                    
+            if max_sum < cur_sum:
+                max_sum = cur_sum
+                max_level = cur_level
                 
-        #     if cur_sum > max_sum:
-        #         max_sum = cur_sum
-        #         max_lev = cur_lev
-            
-        #     cur_lev += 1
-                
+            cur_level += 1
 
-        # return max_lev
-
-        #recursion
-        levels = defaultdict(int)
-        def sum_val(depth,root):
-            if root:
-                levels[depth] += root.val
-                sum_val(depth+1, root.left)
-                sum_val(depth+1, root.right)
         
-        sum_val(1,root)
-        return max(levels, key=levels.get)
-
+        return max_level
         
