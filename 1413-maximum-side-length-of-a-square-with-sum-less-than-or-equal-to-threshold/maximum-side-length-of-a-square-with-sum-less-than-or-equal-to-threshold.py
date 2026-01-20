@@ -7,18 +7,15 @@ class Solution:
             for y in range(1,n+1):
                 cumulated_sum[x][y] = cumulated_sum[x-1][y] + cumulated_sum[x][y-1] + mat[x-1][y-1] - cumulated_sum[x-1][y-1]
 
-        min_len = 0
-        k=1
         ans = 0
-        for x in range(1, m+1):
-            for y in range(1,n+1):
-                while k <= min(x,y):
+        for x in range(1, m + 1):
+            for y in range(1, n + 1):
+                k = ans + 1
+                
+                if x >= k and y >= k:
                     cur_sum = cumulated_sum[x][y] - cumulated_sum[x-k][y] - cumulated_sum[x][y-k] + cumulated_sum[x-k][y-k]
                     if cur_sum <= threshold:
-                        ans = k
-                        k += 1 
-                    else:
-                        break
+                        ans = k 
 
         return ans
 
